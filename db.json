@@ -1,0 +1,42 @@
+{
+  "clientes": [
+    {
+      "nombre": "fabian mera",
+      "rut": "312331231232132",
+      "direccion": "providencia",
+      "id": 4
+    },
+    {
+      "nombre": "Fabian",
+      "rut": "319381983",
+      "direccion": "Parque Central 1621,Santiago",
+      "id": 5
+    },
+    {
+      "nombre": "dsdsdsd",
+      "rut": "dsdsdsdsd",
+      "direccion": "sdsdsdsd",
+      "id": 6
+    },
+    {
+      "nombre": "john",
+      "rut": "15990307-9",
+      "direccion": "CHAITEN",
+      "id": 7
+    }
+  ],
+  "medidores": [
+    {
+      "cod": "00123-AbcDg-6710",
+      "nombre": "Medidor Principal Modelo 1",
+      "fechaCreacion": "2019-01-01",
+      "descripcion": "Medidor Principal Modelo 1"
+    },
+    {
+      "cod": "00123-AfOp-63120",
+      "nombre": "Medidor Secundario Modelo 710M",
+      "fechaCreacion": "2023-03-11",
+      "descripcion": "Medidor Secundario Modelo 710M"
+    }
+  ]
+}
