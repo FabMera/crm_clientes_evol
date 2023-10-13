@@ -4,7 +4,7 @@ import { guardarCliente } from "../../data/clientes";
 import Error from "../../components/Error";
 
 export async function action({ request }) {
-    //React Router Dom,capturamos los datos del formulario.
+    //React Router Dom,capturamos los datos del formulario con formdata.
     const formData = await request.formData();
     const datos = Object.fromEntries(formData);
 

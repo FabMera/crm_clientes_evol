@@ -40,8 +40,8 @@ const EditarCliente = () => {
             <h1 className="font-black text-4xl text-indigo-900">
                Editar Cliente
             </h1>
-            <p className="mt-3">
-                Ingresa todos los campos para registrar un cliente
+            <p className="mt-3 text-indigo-500 font-bold">
+                *Solo puedes editar el nombre y la direccion del cliente
             </p>
             <div className="flex justify-end">
                 <button
@@ -56,7 +56,7 @@ const EditarCliente = () => {
                     errores.map((error, index) => (
                         <Error key={index}>{error}</Error>
                     ))}
-                <Form method="PUT" noValidate>
+                <Form method="post" noValidate>
                     <FormularioCliente cliente={cliente}/>
                     <input
                         type="submit"

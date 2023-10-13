@@ -30,6 +30,7 @@ const FormularioCliente = ({cliente}) => {
                     placeholder="Rut del Cliente"
                     name="rut"
                     defaultValue={cliente?.rut}
+                    disabled={cliente?.rut ? true : false}
                 />
             </div>
 

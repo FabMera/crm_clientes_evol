@@ -29,7 +29,7 @@ const ListadoMedidores = () => {
                     </thead>
                     <tbody>
                         {medidores.map((medidor) => (
-                            <Medidor key={medidor.cod} medidor={medidor} />
+                            <Medidor key={medidor.id} medidor={medidor} />
                         ))}
                     </tbody>
                 </table>

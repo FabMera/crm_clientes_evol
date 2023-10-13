@@ -12,7 +12,7 @@ export async function action({ request }) {
     //Validar los datos
     const errores = [];
     if (Object.values(datos).includes("")) {
-        errores.push("Los campos nombres y fecha de creacion son obligatorios");
+        errores.push("Los campos codigo, nombre y fecha de creacion son obligatorios");
     }
 
     //Si hay errores
@@ -32,8 +32,8 @@ const AgregarMedidor = () => {
             <h1 className="font-black text-4xl text-indigo-900">
                 Nuevo Medidor
             </h1>
-            <p className="mt-3">
-                Ingresa todos los campos para crear un nuevo medidor
+            <p className="mt-3 text-indigo-500 font-black">
+               * Ingresa todos los campos para crear un nuevo medidor
             </p>
             <div className="flex justify-end">
                 <button

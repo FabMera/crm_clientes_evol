@@ -1,8 +1,11 @@
 import clienteAxios from "../apis/clienteAxios";
+//Comunicacion con el backend
+const date = new Date();
 
-export const guardarCliente = async ({ nombre, rut, direccion }) => {
+
+export const guardarCliente = async ({ nombre, rut, direccion}) => {
     try {
-        const save = clienteAxios.post(import.meta.env.VITE_BACKEND_URL + '/clientes', { nombre, rut, direccion })
+        const save = clienteAxios.post(import.meta.env.VITE_BACKEND_URL + '/clientes', { nombre, rut, direccion, date})
         return save;
     } catch (error) {
         console.error(error);
@@ -30,10 +33,19 @@ export const obtenerClientePorId = async (id) => {
     }
 }
 
-export const actualizarCliente = async (id, { nombre, rut, direccion }) => {
+export const actualizarCliente = async (id, { nombre, rut, direccion,medidores }) => {
     try {
-        const response = await clienteAxios.put(import.meta.env.VITE_BACKEND_URL + `/clientes/${id}`, { nombre, rut, direccion });
+        const response = await clienteAxios.put(import.meta.env.VITE_BACKEND_URL + `/clientes/${id}`, { nombre, rut, direccion,medidores });
         return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const eliminarCliente = async (id) => {
+    try {
+         await clienteAxios.delete(import.meta.env.VITE_BACKEND_URL + `/clientes/${id}`);
     } catch (error) {
         console.error(error);
         throw error;

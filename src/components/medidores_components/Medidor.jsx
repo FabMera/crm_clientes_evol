@@ -1,7 +1,7 @@
 import { Form, useNavigate } from "react-router-dom";
 
 const Medidor = ({ medidor }) => {
-    const { cod, nombre, fechaCreacion, descripcion } = medidor;
+    const { id, nombre, fechaCreacion, descripcion,codigo } = medidor;
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -12,7 +12,7 @@ const Medidor = ({ medidor }) => {
     return (
         <tr className="border-b">
             <td className="p-6">
-                <p className="text-xl text-gray-800">{cod}</p>
+                <p className="text-xl text-gray-800">{codigo}</p>
             </td>
             <td className="p-6">
                 <p className="text-xl text-gray-800">{nombre}</p>
@@ -35,13 +35,13 @@ const Medidor = ({ medidor }) => {
             <td className="p-4 flex gap-3">
                 <button
                     className="text-indigo-600 hover:text-indigo-700 uppercase font-bold text-xs"
-                    onClick={() => navigate(`/medidores/${cod}/editar`)}
+                    onClick={() => navigate(`/medidores/${id}/editar`)}
                 >
                     Editar
                 </button>
                 <Form
                     method="POST"
-                    action={`/medidores/${cod}/eliminar`}
+                    action={`/medidores/${id}/eliminar`}
                     onSubmit={handleSubmit}
                 >
                     <button

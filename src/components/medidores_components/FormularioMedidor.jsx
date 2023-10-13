@@ -2,6 +2,19 @@ const FormularioMedidor = ({ medidor }) => {
     return (
         <>
             <div className="mb-4">
+                <label className="text-gray-800" htmlFor="codigo">
+                    Codigo:
+                </label>
+                <input
+                    id="codigo"
+                    type="text"
+                    className="mt-2 block w-full p-3 bg-gray-50"
+                    placeholder="Ingrese el codigo del Medidor"
+                    name="codigo"
+                    defaultValue={medidor?.codigo} //si cliente existe le pasamos los datos al formulario si no ,se crea uno nuevo
+                />
+            </div>
+            <div className="mb-4">
                 <label className="text-gray-800" htmlFor="nombre">
                     Nombre:
                 </label>
