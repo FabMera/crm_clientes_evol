@@ -8,8 +8,9 @@ import { guardarMedidor } from "../../data/medidores";
 export async function action({ request }) {
     const formData = await request.formData();
     const datos = Object.fromEntries(formData);
-
+    console.log(datos);
     //Validar los datos
+
     const errores = [];
     if (Object.values(datos).includes("")) {
         errores.push("Los campos codigo, nombre y fecha de creacion son obligatorios");

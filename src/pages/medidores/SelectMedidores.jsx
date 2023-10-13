@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { todosLosMedidores } from "../../data/medidores";
 import AsignarMedidorCliente from "../../components/clientes_components/AsignarMedidorCliente";
 import { useState } from "react";
@@ -15,7 +15,7 @@ export function loader() {
 
 const SelectMedidores = () => {
     const medidores = useLoaderData();
-
+    const navigate = useNavigate();
     const params = useParams();
     console.log("id del usuario:" + params.medidorCod);
 
@@ -49,10 +49,7 @@ const SelectMedidores = () => {
         console.log(
             `Soy el checkbox ${id} y mi estado de check es ${isChecked}`
         );
-        /*  console.log(medidoresSeleccionados); */
     };
-
-    /*     console.log(medidores);*/
 
     //funcion para asignar medidores a cliente segun los checkboxes seleccionados
 
@@ -90,6 +87,14 @@ const SelectMedidores = () => {
                 Medidores Lipigas
             </h1>
             <p className="mt-3">Administrar Medidores CLIENTE :</p>
+            <div className="flex justify-end">
+                <button
+                    className="bg-indigo-800 text-white px-3 py-1 font-bold uppercase"
+                    onClick={() => navigate(-1)}
+                >
+                    Volver
+                </button>
+            </div>
             {medidores.length ? (
                 <table className="w-full bg-white shadow mt-5 table-auto">
                     <thead className="bg-indigo-800 text-white">
@@ -113,7 +118,9 @@ const SelectMedidores = () => {
                     </tbody>
                 </table>
             ) : (
-                <p className="text-center mt-5">No hay medidores asignados</p>
+                <p className="text-center mt-5">
+                    No hay medidores asignados y/o disponibles
+                </p>
             )}
         </>
     );
