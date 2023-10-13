@@ -6,7 +6,7 @@ const date = new Date();
 export const guardarCliente = async ({ nombre, rut, direccion}) => {
     try {
         const save = clienteAxios.post(import.meta.env.VITE_BACKEND_URL + '/clientes', { nombre, rut, direccion, date})
-        return save;
+        return save.data;
     } catch (error) {
         console.error(error);
         throw error;
@@ -52,10 +52,10 @@ export const eliminarCliente = async (id) => {
     }
 }
 
-export const asignarMedidorCliente = async (id, { medidores }) => {
+export const asignarMedidorCliente = async (id, { medidorAsignado }) => {
     try {
-        const response = await clienteAxios.put(import.meta.env.VITE_BACKEND_URL + `/clientes/update/${id}`, { medidores });
-        return response.data;
+        const response = await clienteAxios.put(import.meta.env.VITE_BACKEND_URL + `/clientes/update/${id}`, { medidorAsignado });
+        return response
     } catch (error) {
         console.error(error);
         throw error;

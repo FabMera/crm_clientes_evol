@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
-import { actualizarCliente, asignarMedidorCliente } from "../../data/clientes";
 
 const AsignarMedidorCliente = ({ medidor, onChange = () => {},medidoresSeleccionados,asignarMedidorAcliente }) => {
     const { nombre, codigo, id } = medidor;

@@ -7,39 +7,56 @@ import {
     obtenerClientePorId,
 } from "../../data/clientes";
 
+//funcion loader para obtener todos los medidores de la base de datos.
 export function loader() {
     const medidores = todosLosMedidores();
     return medidores;
 }
 
 const SelectMedidores = () => {
-    const params = useParams();
-    console.log(params.medidorCod);
+    const medidores = useLoaderData();
 
+    const params = useParams();
+    console.log("id del usuario:" + params.medidorCod);
+
+    //medidoresSeleccionados me indica los medidores que se seleccionan en los checkboxes
+    //y medidorSeleccionado me indica el "medidor" que se selecciona actualmente en el checkbox
     const [medidoresSeleccionados, setMedidoresSeleccionados] = useState([]);
+    const [medidorSeleccionado, setMedidorSeleccionado] = useState("");
+
+    //Buscar el medidor seleccionado en el arreglo de medidores que se obtiene de la base de datos.
+    const buscarMedidorSeleccionado = (medidorSeleccionado) => {
+        const result = medidores.find(
+            (medidor) => medidor.id === medidorSeleccionado
+        );
+        console.log(result);
+        return result;
+    };
+
+    console.log("medidor seleccionado:" + medidorSeleccionado);
 
     const handleCheckboxChange = (id, isChecked) => {
         if (isChecked && medidoresSeleccionados.length <= 3) {
             setMedidoresSeleccionados([...medidoresSeleccionados, id]);
+            setMedidorSeleccionado(id);
         } else {
             setMedidoresSeleccionados(
                 medidoresSeleccionados.filter((medidorId) => medidorId !== id)
             );
+            setMedidorSeleccionado("");
         }
 
         console.log(
             `Soy el checkbox ${id} y mi estado de check es ${isChecked}`
         );
-        console.log(medidoresSeleccionados);
+        /*  console.log(medidoresSeleccionados); */
     };
 
-    const medidores = useLoaderData();
-    console.log(medidores);
-    console.log(medidoresSeleccionados);
+    /*     console.log(medidores);*/
 
     //funcion para asignar medidores a cliente segun los checkboxes seleccionados
 
-    const asignarMedidorAcliente =  async() => {
+    const asignarMedidorAcliente = async () => {
         if (medidoresSeleccionados.length === 0) {
             alert("Debes seleccionar al menos un medidor");
             return;
@@ -50,12 +67,20 @@ const SelectMedidores = () => {
             alert("No se encontro el cliente");
             return;
         }
-      
-        
-        cliente.medidores = medidoresSeleccionados.forEach(async (medidorId) => {
-            await asignarMedidorCliente(cliente.id, medidorId );
-            return
-        });
+        const medidor = buscarMedidorSeleccionado(medidorSeleccionado);
+        //Buscar si el medidor ya esta asignado a un cliente
+        if (medidor.asignado === true) {
+            alert("El medidor ya se encuentra asignado");
+            return;
+        }
+
+        medidor.asignado = true;
+        medidor.cliente = cliente.id;
+        cliente.medidores = [...cliente.medidores, medidor];
+
+        const medidorAsignado = medidor;
+        await asignarMedidorCliente(cliente.id, medidorAsignado);
+
         alert("Medidores asignados correctamente");
     };
 
