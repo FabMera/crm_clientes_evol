@@ -1,10 +1,18 @@
-import { Form, redirect, useActionData, useLoaderData, useNavigate } from "react-router-dom"
-import FormularioMedidor from "../../components/medidores_components/FormularioMedidor"
+import {
+    Form,
+    redirect,
+    useActionData,
+    useLoaderData,
+    useNavigate,
+} from "react-router-dom";
+import FormularioMedidor from "../../components/medidores_components/FormularioMedidor";
 import Error from "../../components/Error";
-import { actualizarInfoMedidor, obtenerMedidorPorId } from "../../data/medidores";
+import {
+    actualizarInfoMedidor,
+    obtenerMedidorPorId,
+} from "../../data/medidores";
 
-
-export async function action({ request,params }) {
+export async function action({ request, params }) {
     const formData = await request.formData();
     const datos = Object.fromEntries(formData);
 
@@ -25,14 +33,13 @@ export async function action({ request,params }) {
 }
 
 export async function loader({ params }) {
-  
     const medidor = await obtenerMedidorPorId(params.medidorCod);
     console.log(medidor);
-    if(Object.values(medidor).length === 0){
-        throw new Response("",{
-            status:404,
-            statusText:"No se encontro el medidor"
-        })
+    if (Object.values(medidor).length === 0) {
+        throw new Response("", {
+            status: 404,
+            statusText: "No se encontro el medidor",
+        });
     }
     return medidor;
 }
@@ -41,10 +48,10 @@ const EditarDatosMedidor = () => {
     const errores = useActionData();
     const navigate = useNavigate();
     const medidor = useLoaderData();
-  return (
-    <>
+    return (
+        <>
             <h1 className="font-black text-4xl text-indigo-900">
-               Editar Medidor
+                Editar Medidor
             </h1>
             <p className="mt-3 text-indigo-500 font-black">
                 Ingresa todos los campos requeridos.
@@ -62,8 +69,8 @@ const EditarDatosMedidor = () => {
                     errores.map((error, index) => (
                         <Error key={index}>{error}</Error>
                     ))}
-                <Form method="PUT" noValidate>
-                    <FormularioMedidor medidor={medidor}/>
+                <Form method="post" noValidate>
+                    <FormularioMedidor medidor={medidor} />
                     <input
                         type="submit"
                         className="mt-5 w-full bg-indigo-700 p-3 uppercase font-bold text-white text-lg rounded-sm"
@@ -72,7 +79,7 @@ const EditarDatosMedidor = () => {
                 </Form>
             </div>
         </>
-  )
-}
+    );
+};
 
-export default EditarDatosMedidor
+export default EditarDatosMedidor;

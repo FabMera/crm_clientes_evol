@@ -1,9 +1,10 @@
 import clienteAxios from "../apis/clienteAxios";
 //Comunicacion con el backend
 
+
 export const guardarMedidor = async ({ nombre, fechaCreacion, descripcion,codigo }) => {
     try {
-        const save = clienteAxios.post('/medidores', { nombre, fechaCreacion, descripcion,codigo })
+        const save = clienteAxios.post(import.meta.env.VITE_BACKEND_URL + '/medidores', { nombre, fechaCreacion, descripcion,codigo })
         return save;
     } catch (error) {
         console.error(error);

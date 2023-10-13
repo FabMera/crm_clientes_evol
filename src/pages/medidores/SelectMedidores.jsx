@@ -1,7 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { todosLosMedidores } from "../../data/medidores";
 import AsignarMedidorCliente from "../../components/clientes_components/AsignarMedidorCliente";
 import { useState } from "react";
+import {
+    asignarMedidorCliente,
+    obtenerClientePorId,
+} from "../../data/clientes";
 
 export function loader() {
     const medidores = todosLosMedidores();
@@ -9,16 +13,20 @@ export function loader() {
 }
 
 const SelectMedidores = () => {
+    const params = useParams();
+    console.log(params.medidorCod);
+
     const [medidoresSeleccionados, setMedidoresSeleccionados] = useState([]);
 
     const handleCheckboxChange = (id, isChecked) => {
-        if (isChecked) {
+        if (isChecked && medidoresSeleccionados.length <= 3) {
             setMedidoresSeleccionados([...medidoresSeleccionados, id]);
         } else {
             setMedidoresSeleccionados(
                 medidoresSeleccionados.filter((medidorId) => medidorId !== id)
             );
         }
+
         console.log(
             `Soy el checkbox ${id} y mi estado de check es ${isChecked}`
         );
@@ -28,6 +36,29 @@ const SelectMedidores = () => {
     const medidores = useLoaderData();
     console.log(medidores);
     console.log(medidoresSeleccionados);
+
+    //funcion para asignar medidores a cliente segun los checkboxes seleccionados
+
+    const asignarMedidorAcliente =  async() => {
+        if (medidoresSeleccionados.length === 0) {
+            alert("Debes seleccionar al menos un medidor");
+            return;
+        }
+        const cliente = await obtenerClientePorId(params.medidorCod);
+        console.log(cliente);
+        if (Object.values(cliente).length === 0) {
+            alert("No se encontro el cliente");
+            return;
+        }
+      
+        
+        cliente.medidores = medidoresSeleccionados.forEach(async (medidorId) => {
+            await asignarMedidorCliente(cliente.id, medidorId );
+            return
+        });
+        alert("Medidores asignados correctamente");
+    };
+
     return (
         <>
             <h1 className="font-black text-4xl text-indigo-900">
@@ -47,6 +78,8 @@ const SelectMedidores = () => {
                     <tbody>
                         {medidores.map((medidor) => (
                             <AsignarMedidorCliente
+                                medidoresSeleccionados={medidoresSeleccionados}
+                                asignarMedidorAcliente={asignarMedidorAcliente}
                                 onChange={handleCheckboxChange}
                                 key={medidor.id}
                                 medidor={medidor}

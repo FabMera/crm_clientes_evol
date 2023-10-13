@@ -18,16 +18,22 @@ import ListadoMedidores, {
 } from "./pages/medidores/ListadoMedidores";
 
 //Editar
-import EditarDatosMedidor, {action as editarMedidorAction,loader as editarMedidorLoader} from "./pages/medidores/EditarDatosMedidor";
+import EditarDatosMedidor, {
+    action as editarMedidorAction,
+    loader as editarMedidorLoader,
+} from "./pages/medidores/EditarDatosMedidor";
 import EditarCliente, {
     action as editarClienteAction,
     loader as editarClienteLoader,
 } from "./pages/clientes/EditarCliente";
-import {action as eliminarClienteAction} from "./components/clientes_components/Cliente";
+import { action as eliminarClienteAction } from "./components/clientes_components/Cliente";
 //Error
 import ErrorPage from "./components/ErrorPage";
 
-import SelectMedidores,{loader as asignarMedidorLoader} from "./pages/medidores/SelectMedidores";
+import SelectMedidores, {
+    loader as asignarMedidorLoader,
+} from "./pages/medidores/SelectMedidores";
+import { action as eliminarMedidorAction } from "./components/medidores_components/Medidor";
 
 const router = createBrowserRouter([
     {
@@ -78,11 +84,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "/clientes/:medidorCod/asignar",
-                element:<SelectMedidores/>,
+                element: <SelectMedidores />,
                 loader: asignarMedidorLoader,
             },
             {
                 path: "/medidores/:medidorCod/eliminar",
+                action: eliminarMedidorAction,
             },
         ],
     },

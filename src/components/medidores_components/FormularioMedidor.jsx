@@ -49,7 +49,7 @@ const FormularioMedidor = ({ medidor }) => {
                     id="descripcion"
                     type="text"
                     className="mt-2 block w-full p-3 bg-gray-50"
-                    placeholder="Agregue una descripcion del medidor"
+                    placeholder="Agregue una descripcion del medidor (opcional)"
                     name="descripcion"
                     defaultValue={medidor?.descripcion}
                 ></textarea>

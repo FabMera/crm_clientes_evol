@@ -33,7 +33,7 @@ const AgregarMedidor = () => {
                 Nuevo Medidor
             </h1>
             <p className="mt-3 text-indigo-500 font-black">
-               * Ingresa todos los campos para crear un nuevo medidor
+               * Ingresa todos los campos requeridos para crear un nuevo medidor
             </p>
             <div className="flex justify-end">
                 <button

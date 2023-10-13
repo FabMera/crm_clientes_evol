@@ -27,8 +27,9 @@ const FormularioCliente = ({cliente}) => {
                     id="rut"
                     type="text"
                     className="mt-2 block w-full p-3 bg-gray-50"
-                    placeholder="Rut del Cliente"
+                    placeholder="Rut del Cliente,sin puntos ni guion"
                     name="rut"
+                    maxLength={9}
                     defaultValue={cliente?.rut}
                     disabled={cliente?.rut ? true : false}
                 />
@@ -43,7 +44,7 @@ const FormularioCliente = ({cliente}) => {
                     id="direccion"
                     type="text"
                     className="mt-2 block w-full p-3 bg-gray-50"
-                    placeholder="Teléfono del Cliente"
+                    placeholder="Direccion del Cliente"
                     name="direccion"
                     defaultValue={cliente?.direccion}
                 />

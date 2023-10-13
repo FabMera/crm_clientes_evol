@@ -1,8 +1,6 @@
 import { Form, redirect, useNavigate } from "react-router-dom";
 import { eliminarCliente } from "../../data/clientes";
-import ModalAsignar from "./ModalAsignar";
-import { useState } from "react";
-
+import { FaEdit,FaRegTrashAlt,FaEye} from "react-icons/fa";
 
 //Funcion action para eliminar
 export async function action({ params }) {
@@ -17,13 +15,11 @@ const Cliente = ({ cliente }) => {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!confirm("¿Estas seguro de eliminar el cliente?")) return;
+     
+        if (!confirm("¿Estas seguro de eliminar el cliente?")){
+            e.preventDefault();
+        }
     };
-const [isOpen, setIsOpen] = useState(false);
-const handlerOpenModal = () => {
-setIsOpen(true);
-}
 
 
     return (
@@ -39,32 +35,31 @@ setIsOpen(true);
                     </span>
                 </p>
             </td>
-            <td className="p-4 flex gap-3">
+            <td className="p-6 flex gap-3 ">
                 <button
-                    className="text-indigo-600 hover:text-indigo-700 uppercase font-bold text-xs"
                     onClick={() => navigate(`/clientes/${id}/editar`)}
                 >
-                    Editar
+                    <FaEdit style={{color: 'blue', fontSize: '20px'}}/>
                 </button>
                 <Form
-                    method="POST"
+                    method="post"
                     action={`/clientes/${id}/eliminar`}
                     onSubmit={handleSubmit}
                 >
                     <button
                         type="submit"
-                        className="text-red-600 hover:text-red-700 uppercase font-bold text-xs"
                     >
-                        Eliminar
+                        <FaRegTrashAlt style={{color: 'red', fontSize: '20px'}}/>
                     </button>
                 </Form>
             </td>
-            <td>
+            <td className="p-6">
                 <button
                     className="text-indigo-600 hover:text-indigo-700 uppercase font-bold text-xs"
                     onClick={() => navigate(`/clientes/${id}/asignar`)}
                 >
-                    <ModalAsignar/>
+                    Asignar Medidor
+                    <FaEye style={{color: 'green', fontSize: '20px'}}/>
                 </button>
             </td>
         </tr>

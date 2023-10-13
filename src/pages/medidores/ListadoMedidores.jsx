@@ -34,7 +34,7 @@ const ListadoMedidores = () => {
                     </tbody>
                 </table>
             ) : (
-                <p className="text-center mt-5">No hay clientes registrados</p>
+                <p className="text-center mt-5">No hay medidores creados.</p>
             )}
         </>
     );

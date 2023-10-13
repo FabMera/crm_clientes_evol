@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
-import { actualizarCliente } from "../../data/clientes";
+import { actualizarCliente, asignarMedidorCliente } from "../../data/clientes";
 
-const AsignarMedidorCliente = ({ medidor, onChange = () => {} }) => {
+const AsignarMedidorCliente = ({ medidor, onChange = () => {},medidoresSeleccionados,asignarMedidorAcliente }) => {
     const { nombre, codigo, id } = medidor;
 
     const [isChecked, setIsChecked] = useState(false);
@@ -32,10 +32,12 @@ const AsignarMedidorCliente = ({ medidor, onChange = () => {} }) => {
                     checked={isChecked}
                     onChange={handleOnChange}
                     id={id}
+                    disabled={medidoresSeleccionados.length === 3 && !isChecked }
                 />
 
                 <button
                     type="submit"
+                    onClick={()=>asignarMedidorAcliente(id,medidoresSeleccionados)}
                     value="  Asignar a Cliente"
                     className="text-red-600 hover:text-red-700 uppercase font-bold text-xs"
                 >
